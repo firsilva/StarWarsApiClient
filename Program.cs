@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using RestSharp;
+using StarWarsAPIClient.Client;
 using StarWarsAPIClient.DataBase;
 
 namespace StarWarsAPIClient
@@ -10,15 +11,17 @@ namespace StarWarsAPIClient
     {
         static void Main(string[] args)
         {
-            var client = new RestClient("https://swapi.co/api/planets/");
-            var request = new RestRequest(Method.GET);
-            var response = client.Execute(request);
-            
-            var planetas = JsonConvert.DeserializeObject<(new {results = new List<PlanetModel>()}))>(response.Content);
-            
-            foreach(var p in planetas.results){
-                System.Console.WriteLine($"{p.name} rotation {p.rotation_period}");
+            var client = new StarWarsClient();
+            var result = client.GetContent("planets/13");
+            var planeta = JsonConvert.DeserializeObject<PlanetModel>(result);
+            System.Console.WriteLine(planeta.Name);
+            System.Console.WriteLine(planeta.Gravity);
+            foreach(var film in planeta.Films){
+                System.Console.WriteLine(film);
             }
+            //JsonConvert.DeserializeAnonymousType(response.Content, (new {count = 0, next = "", results = new List<PlanetModel>()}));
+
+
         }
     }
 }
