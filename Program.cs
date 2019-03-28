@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using RestSharp;
 using StarWarsAPIClient.Client;
 using StarWarsAPIClient.DataBase;
+using StarWarsAPIClient.DataBase.Planet;
 
 namespace StarWarsAPIClient
 {
@@ -11,13 +12,9 @@ namespace StarWarsAPIClient
     {
         static void Main(string[] args)
         {
-            var client = new StarWarsClient();
-            var result = client.GetContent("planets/13");
-            var planeta = JsonConvert.DeserializeObject<PlanetModel>(result);
-            System.Console.WriteLine(planeta.Name);
-            System.Console.WriteLine(planeta.Gravity);
-            foreach(var film in planeta.Films){
-                System.Console.WriteLine(film);
+            var planetas = PlanetRepository.GetAll();
+            foreach(var planeta in planetas){
+                System.Console.WriteLine(planeta.Name);
             }
             //JsonConvert.DeserializeAnonymousType(response.Content, (new {count = 0, next = "", results = new List<PlanetModel>()}));
 

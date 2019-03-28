@@ -10,13 +10,13 @@ namespace StarWarsAPIClient.DataBase
         public string Name { get; set; }
         
         [JsonProperty("rotation_period")]
-        public int RotationPeriod { get; set; }
+        public string RotationPeriod { get; set; }
 
         [JsonProperty("orbital_period")]
-        public int OrbitalPeriod { get; set; }
+        public string OrbitalPeriod { get; set; }
 
         [JsonProperty("diameter")]
-        public int Diameter { get; set; }
+        public string Diameter { get; set; }
 
         [JsonProperty("climate")]        
         public string Climate { get; set; }
